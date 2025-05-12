@@ -1,0 +1,23 @@
+// Configuración del generador de Prisma
+generator client {
+  provider = "prisma-client-js"
+}
+
+// Configuración de la base de datos
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// Modelo para almacenar las mediciones
+model Medicion {
+  id            Int      @id @default(autoincrement())
+  timestamp     DateTime @default(now())
+  temperatura   Float
+  humedad       Float
+  consumoKwh    Float
+  corrienteRms  Float
+  calidadAire   Int      // Índice de calidad del aire (ej. 0-500)
+
+  @@index([timestamp]) // Índice para consultas por fecha
+} 
