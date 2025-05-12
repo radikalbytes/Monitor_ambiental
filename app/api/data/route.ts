@@ -5,7 +5,7 @@ import { z } from 'zod';
 /**
  * Esquema de validación para los datos recibidos
  */
-export const DataSchema = z.object({
+const DataSchema = z.object({
   temperatura: z.number(),
   humedad: z.number(),
   consumoKwh: z.number(),
