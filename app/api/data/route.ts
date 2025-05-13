@@ -3,17 +3,6 @@ import { prisma } from '@/lib/db';
 import { z } from 'zod';
 
 /**
- * Esquema de validación para los datos recibidos
- */
-const DataSchema = z.object({
-  temperatura: z.number(),
-  humedad: z.number(),
-  consumoKwh: z.number(),
-  corrienteRms: z.number(),
-  calidadAire: z.number().int(),
-});
-
-/**
  * Endpoint para recibir datos mediante POST
  * @param {Request} request - Solicitud HTTP
  * @returns {Promise<NextResponse>} Respuesta HTTP
@@ -22,8 +11,17 @@ export async function POST(request: Request) {
   try {
     const body = await request.json();
     
+    // Esquema de validación para los datos recibidos
+    const dataSchema = z.object({
+      temperatura: z.number(),
+      humedad: z.number(),
+      consumoKwh: z.number(),
+      corrienteRms: z.number(),
+      calidadAire: z.number().int(),
+    });
+    
     // Validar los datos recibidos
-    const validationResult = DataSchema.safeParse(body);
+    const validationResult = dataSchema.safeParse(body);
     
     if (!validationResult.success) {
       return NextResponse.json(
