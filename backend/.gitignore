@@ -1,0 +1,14 @@
+# Variables de entorno
+.env
+
+# Build
+dist/*
+
+# Logs
+logs/*
+
+# Dependencias
+node_modules/*
+
+# Archivos de prueba
+test/
